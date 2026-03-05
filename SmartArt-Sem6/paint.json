@@ -1,0 +1,173 @@
+[
+    {
+        "id": 1,
+        "name":" customise Artwork",
+        "price": 10000,
+        "image": "img/y2.jpeg"
+    },
+    {
+        "id": 2,
+        "name":" The Vasudev",
+        "price": 7999,
+        "image": "img/y1.jpeg"
+    },
+    {
+        "id": 3,
+        "name":"parrot Bird",
+        "price": 6500,
+        "image": "img/y3.jpeg"
+    },
+    {
+        "id": 4,
+        "name":" Chatrapati Shivaji Maharaj Painting",
+        "price": 15000,
+        "image": "img/y5.jpeg"
+    },
+    {
+        "id": 5,
+        "name":" Swami samartha painting",
+        "price": 9999,
+        "image": "img/y6.jpeg"
+    },
+    {
+        "id": 6,
+        "name":"Maa Durga Painting",
+        "price": 11500,
+        "image": "img/y7.jpeg"
+    },
+    {
+        "id": 7,
+        "name":" A5 SIze Sketch",
+        "price": 7500,
+        "image": "img/y8.jpeg"
+    },
+    {
+        "id": 8,
+        "name":"Baby Boy Sketch",
+        "price": 5500,
+        "image": "img/y4.jpeg"
+    },
+    {
+        "id": 9,
+        "name":" The Visionary Artist",
+        "price": 8500,
+        "image": "img/p.jpg"
+    },
+    {
+        "id": 10,
+        "name":" Enchanted Muse",
+        "price": 9500,
+        "image": "img/p1 (2).jpg"
+    },
+    {
+        "id": 11,
+        "name":" Mystic Soul",
+        "price": 11500,
+        "image": "img/p1 (3).jpg"
+    },
+    {
+        "id": 12,
+        "name":" Winter Guardian",
+        "price": 9999,
+        "image": "img/p1 (4).jpg"
+    },
+    {
+        "id": 13,
+        "name":" Flaming Spirit",
+        "price": 12000,
+        "image": "img/p1 (5).jpg"
+    },
+    {
+        "id": 14,
+        "name":" Forest Whisperer",
+        "price": 10500,
+        "image": "img/p1 (6).jpg"
+    },
+    {
+        "id": 15,
+        "name":" Sleeping Goddess",
+        "price": 8999,
+        "image": "img/p1 (7).jpg"
+    },
+    {
+        "id": 16,
+        "name":" The Watchful Eye ",
+        "price": 11500,
+        "image": "img/w1.webp"
+    },
+    {
+        "id": 17,
+        "name":" Mix Media Drawing",
+        "price": 10500,
+        "image": "img/w2.jfif"
+    },
+    {
+        "id": 18,
+        "name":" Acrylic Painting",
+        "price": 9500,
+        "image": "img/w3.jfif"
+    },
+    {
+        "id": 19,
+        "name":"Acrylic Landscape Painting ",
+        "price": 9500,
+        "image": "img/w4.jfif"
+    },
+    {
+        "id": 20,
+        "name":" Contemporary acrylic painting",
+        "price": 11000,
+        "image": "img/w5.jpg"
+    },
+    {
+        "id": 21,
+        "name":"Budha Face Painting ",
+        "price": 11500,
+        "image": "img/x1.jfif"
+    },
+    {
+        "id": 22,
+        "name":"Flower Painting",
+        "price": 9999,
+        "image": "img/x2.webp"
+    },
+    {
+        "id": 23,
+        "name":"Lord Ganesha Painting ",
+        "price": 12000,
+        "image": "img/x3.webp"
+    },
+    {
+        "id": 24,
+        "name":"Pink Purple Painting ",
+        "price": 10500,
+        "image": "img/x4.jfif"
+    },
+    {
+        "id": 25,
+        "name":" The Beautiful Flowers  ",
+        "price": 8999,
+        "image": "img/x5.jfif"
+    },
+    {
+        "id": 26,
+        "name":" The Tree",
+        "price": 11500,
+        "image": "img/x6.jfif"
+    },
+    {
+        "id": 27,
+        "name":"Abstract Painting ",
+        "price": 10500,
+        "image": "img/x7.jfif"
+    },
+    {
+        "id": 28,
+        "name":" Horse Painting",
+        "price": 9500,
+        "image": "img/x8.jfif"
+    }
+   
+
+]
+

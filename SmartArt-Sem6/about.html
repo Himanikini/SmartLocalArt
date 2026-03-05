@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SmartArt Local Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
+            z-index: 0;
+        }
+
+        .about-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            padding: 40px;
+            max-width: 1000px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .about-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .text-container {
+            flex: 2;
+            padding-left: 40px;
+        }
+
+        .text-container h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin: 0;
+            line-height: 1.2;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .text-container h2 {
+            font-size: 1.5em;
+            color: #e0e0e0;
+            margin-top: 20px;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .text-container p {
+            font-size: 1.1em;
+            color: #ffffff;
+            line-height: 1.8;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                flex-direction: column;
+                padding: 30px;
+            }
+
+            .text-container {
+                padding-left: 0;
+                padding-top: 30px;
+                text-align: center;
+            }
+
+            .image-container img {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <div class="image-container">
+            <img src="img/about.jpg" alt="SmartArt Marketplace">
+        </div>
+        <div class="text-container">
+            <h1>About Us</h1>
+            <h2>Discover the Magic of Local Artistry</h2>
+            <p>Welcome to SmartArt Local Marketplace, your premier destination for exceptional handcrafted art and unique creations. We've cultivated a thriving community where talented local artisans showcase their masterpieces, from breathtaking paintings and sculptural pottery to contemporary fashion accessories and artisanal home decor.</p>
+            <p>Our carefully curated collection features an array of distinctive pieces, including handmade jewelry, custom greeting cards, and wellness products crafted with love. Each item tells a story and represents the dedication of our skilled artisans. By choosing SmartArt, you're not just acquiring a piece of art – you're supporting local creativity and becoming part of our vibrant artistic community.</p>
+        </div>
+    </div>
+</body>
+</html>

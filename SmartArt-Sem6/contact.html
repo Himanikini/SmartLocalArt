@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SmartArt Local Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: url('background.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
+            z-index: 0;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            width: 350px; /* Reduced from 400px */
+            padding: 25px; /* Reduced from 30px */
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            font-size: 1.8em; /* Reduced from 2em */
+            margin-bottom: 20px; /* Reduced from 25px */
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px 12px; /* Reduced from 12px 15px */
+            margin: 6px 0; /* Reduced from 8px */
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            font-size: 0.95em; /* Reduced from 1em */
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            color: #ffffff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .contact-form textarea {
+            height: 100px; /* Reduced from 120px */
+            resize: none;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-form input[type="submit"] {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 10px; /* Reduced from 12px */
+            cursor: pointer;
+            font-size: 1em; /* Reduced from 1.1em */
+            font-weight: 500;
+            border-radius: 10px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-form input[type="submit"]:hover {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            transform: scale(1.02);
+        }
+
+        .support-info {
+            margin-top: 20px; /* Reduced from 25px */
+            font-size: 0.9em; /* Reduced from 1em */
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            padding: 12px; /* Reduced from 15px */
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .support-info p {
+            margin: 6px 0; /* Reduced from 8px */
+        }
+
+        .support-info b {
+            color: #b7daf2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <form class="contact-form" onsubmit="return handleSubmit(event)">
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+            <input type="submit" value="Send Message">
+        </form>
+
+        <div class="support-info">
+            <p><b>Support Email:</b> localbusinesssupport@gmail.com</p>
+            <p><b>Contact Number:</b> +91 9290875265</p>
+        </div>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = document.querySelector('.contact-form');
+            const submitBtn = form.querySelector('input[type="submit"]');
+            
+            // Disable button during submission
+            submitBtn.disabled = true;
+            submitBtn.value = "Sending...";
+            
+            // Simulate sending (you can replace with actual API call)
+            setTimeout(() => {
+                alert("Thank you for your message! We'll get back to you soon.");
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.value = "Send Message";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

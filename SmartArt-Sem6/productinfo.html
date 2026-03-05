@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Painting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .image-preview {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
+
+    <!-- Form Container -->
+    <div class="glass-effect p-8 rounded-2xl shadow-lg w-full max-w-2xl">
+        <h2 class="text-3xl font-bold text-black text-center mb-6">Upload Your Artwork 🎨</h2>
+
+        <!-- Painting Name -->
+        <div class="mb-4">
+            <label class="block font-bold text-black">Painting Name*</label>
+            <input type="text" class="w-full p-3 bg-white/30 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter painting name">
+        </div>
+
+        <!-- Painting Media Upload -->
+        <div class="mb-4">
+            <label class="block font-bold text-black">Painting Media (optional)</label>
+            <p class="text-sm font-semibold text-black">You can add up to 4 images and 1 video</p>
+            <div id="imagePreviewContainer" class="flex items-center gap-3 mt-2 flex-wrap">
+                <label class="w-20 h-20 border border-white/50 flex justify-center items-center rounded-lg cursor-pointer bg-white/30 text-black font-bold">
+                    <input type="file" class="hidden" id="imageUpload" accept="image/*" multiple onchange="handleImageUpload(event)">
+                    + Upload
+                </label>
+            </div>
+            <div class="mt-2">
+                <p class="text-sm text-black">Or paste image (Ctrl+V)</p>
+            </div>
+        </div>
+
+        <!-- Pricing -->
+        <div class="mb-4">
+            <h3 class="text-xl font-bold text-black">Pricing</h3>
+            <label class="block font-bold text-black">Price*</label>
+            <input type="number" class="w-full p-3 bg-white/30 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="₹ 1000">
+        </div>
+
+        <!-- Category & Tags -->
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+                <label class="block font-bold text-black">Painting Category</label>
+                <select class="w-full p-3 bg-white/30 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>Abstract</option>
+                    <option>Realism</option>
+                    <option>Impressionism</option>
+                    <option>Expressionism</option>
+                    <option>Surrealism</option>
+                    <option>Modernism</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-bold text-black">Product Tags</label>
+                <input type="text" class="w-full p-3 bg-white/30 border border-white/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter tags">
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-center">
+            <button onclick="showPopup()" class="bg-blue-500 text-black font-bold px-6 py-3 rounded-full shadow-md hover:bg-blue-600 transition duration-300">Submit</button>
+        </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div id="popup" class="fixed top-5 right-5 bg-green-500 text-black font-bold px-5 py-3 rounded-md shadow-lg opacity-0 transition-opacity duration-500">
+        ✅ Submitted Successfully!
+    </div>
+
+    <script>
+        // Handle file upload
+        function handleImageUpload(event) {
+            const files = event.target.files;
+            const container = document.getElementById('imagePreviewContainer');
+            
+            for (let i = 0; i < files.length && i < 4; i++) {
+                const file = files[i];
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        addImagePreview(e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+
+        // Handle paste
+        document.addEventListener('paste', function(event) {
+            const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+            for (let item of items) {
+                if (item.type.indexOf('image') === 0) {
+                    const blob = item.getAsFile();
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        addImagePreview(e.target.result);
+                    }
+                    reader.readAsDataURL(blob);
+                }
+            }
+        });
+
+        function addImagePreview(src) {
+            const container = document.getElementById('imagePreviewContainer');
+            const existingImages = container.querySelectorAll('img').length;
+            
+            if (existingImages < 4) {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'image-preview';
+                img.onclick = function() {
+                    if (confirm('Remove this image?')) {
+                        img.remove();
+                    }
+                };
+                container.insertBefore(img, container.firstChild);
+            } else {
+                alert('Maximum 4 images allowed');
+            }
+        }
+
+        function showPopup() {
+            var popup = document.getElementById("popup");
+            popup.classList.remove("opacity-0");  // Show popup
+            setTimeout(function () {
+                popup.classList.add("opacity-0");  // Hide popup after 3 seconds
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>

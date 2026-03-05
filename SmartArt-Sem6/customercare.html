@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Care Page</title>
+    <style>
+        body {
+            background-image: url('./background.jpg'); /* Updated path with ./ */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Added to fix background */
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 350px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transform: translateY(0); 
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(31, 38, 135, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        label {
+            font-size: 0.85em;
+            color: #34495e;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        textarea, select {
+            width: calc(100% - 16px); /* Adjust for padding */
+            padding: 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+            background: white;
+            color: #2c3e50;
+            box-sizing: border-box;
+        }
+
+        textarea:focus, select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+            outline: none;
+        }
+
+        textarea {
+            height: 80px;
+            resize: vertical;
+            max-width: 100%;
+        }
+
+        select {
+            height: 35px;
+            cursor: pointer;
+            max-width: 100%;
+        }
+
+        .shop-selection, .rating-box, .feedback-box {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: white;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #2980b9, #3498db);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+
+        .contact-section {
+            margin-top: 15px;
+            text-align: center;
+            padding: 10px;
+            border-top: 1px solid #f0f0f0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .contact-section p {
+            margin: 0;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+
+        .contact-section a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            word-wrap: break-word;
+        }
+
+        .contact-section a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .rating-box select {
+            font-family: 'Arial Unicode MS', sans-serif;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Care</h1>
+
+        <div class="shop-selection">
+            <label for="shop">Select Shop:</label>
+            <select id="shop">
+                <option value="" disabled selected>Choose a shop to rate</option>
+                <option value="Shop 1">🛍️ Gayatri Tote Bag Shop</option>
+                <option value="Shop 2">🕰️ Rashmi Resin Clock</option>
+                <option value="Shop 3">🕯️ Divya Candles Shop</option>
+                <option value="Shop 4">🎨 Yash Artwork</option>
+                <option value="Shop 5">🎀 Ananya Scrunchies Shop</option>
+                <option value="Shop 6">📚 Aakash Bookmark Shop</option>
+            </select>
+        </div>
+
+        <div class="rating-box">
+            <label for="rating">Rate Your Experience:</label>
+            <select id="rating">
+                <option value="" disabled selected>How would you rate the shop?</option>
+                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                <option value="4">⭐⭐⭐⭐ Very Good</option>
+                <option value="3">⭐⭐⭐ Good</option>
+                <option value="2">⭐⭐ Fair</option>
+                <option value="1">⭐ Needs Improvement</option>
+            </select>
+        </div>
+
+        <div class="feedback-box">
+            <label for="feedback">Share Your Thoughts:</label>
+            <textarea id="feedback" placeholder="Tell us about your experience with the shop..."></textarea>
+        </div>
+
+        <div class="contact-section">
+            <p>Need additional support? Reach out to us:</p>
+            <a href="mailto:support@smartartmarketplace.com">📧 support@smartartmarketplace.com</a>
+        </div>
+
+        <button class="submit-btn" onclick="submitForm()">Submit Feedback</button>
+    </div>
+
+    <script>
+        function submitForm() {
+            const shop = document.getElementById('shop').value;
+            const rating = document.getElementById('rating').value;
+            const feedback = document.getElementById('feedback').value;
+
+            if (!shop || !rating || !feedback.trim()) {
+                alert("Please complete all fields before submitting.");
+                return;
+            }
+
+            // Animation effect for success message
+            const container = document.querySelector('.container');
+            container.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                container.style.transform = 'scale(1)';
+                alert("Thank you! Your feedback has been submitted successfully!");
+                
+                // Clear form
+                document.getElementById('shop').selectedIndex = 0;
+                document.getElementById('rating').selectedIndex = 0;
+                document.getElementById('feedback').value = '';
+            }, 200);
+        }
+    </script>
+</body>
+</html>
