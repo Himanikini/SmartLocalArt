@@ -1,0 +1,9 @@
+[build]
+  # The website files live in the SmartArt-Sem6 folder, not the repository root
+  publish = "SmartArt-Sem6"
+
+# Open the login page when someone visits the site's home URL
+[[redirects]]
+  from = "/"
+  to = "/login.html"
+  status = 200
