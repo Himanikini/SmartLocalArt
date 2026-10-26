@@ -1,0 +1,9 @@
+[build]
+  # The website files live in this folder, not the repository root
+  publish = "SmartArt-Sem6"
+
+# Serve the login page as the home page
+[[redirects]]
+  from = "/"
+  to = "/login.html"
+  status = 200
