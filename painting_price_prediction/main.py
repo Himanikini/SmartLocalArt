@@ -19,18 +19,11 @@ class PaintingInput(BaseModel):
     style: str
     medium: str
     size: str
-    frame: str
     location: str
-    delivery_days: int
-    shipment: str
-    color_palette: str
-    copy_original: str
-    print_real: str
     environment: str
-    mood: str
-    lighting: str
-    reproduction: str
-    audience: str
+    frame: str | None = None
+    mood: str | None = None
+    audience: str | None = None
 
 # Initialize FastAPI
 app = FastAPI()
@@ -48,8 +41,9 @@ async def predict_price(data: PaintingInput):
         # Create a DataFrame with all zeros
         new_painting_df = pd.DataFrame(0, index=[0], columns=columns)
 
-        # Assign numerical value
-        new_painting_df['Delivery (days)'] = data.delivery_days
+        # Assign numerical value only when provided
+        if data.delivery_days is not None:
+            new_painting_df['Delivery (days)'] = data.delivery_days
 
         # Manually set one-hot encoded values
         if f"painter_{data.painter}" in new_painting_df.columns:
@@ -67,37 +61,37 @@ async def predict_price(data: PaintingInput):
         if f"size_{data.size}" in new_painting_df.columns:
             new_painting_df[f"size_{data.size}"] = 1
 
-        if f"frame_{data.frame}" in new_painting_df.columns:
+        if data.frame is not None and f"frame_{data.frame}" in new_painting_df.columns:
             new_painting_df[f"frame_{data.frame}"] = 1
 
         if f"location_{data.location}" in new_painting_df.columns:
             new_painting_df[f"location_{data.location}"] = 1
 
-        if f"shipment_{data.shipment}" in new_painting_df.columns:
+        if data.shipment is not None and f"shipment_{data.shipment}" in new_painting_df.columns:
             new_painting_df[f"shipment_{data.shipment}"] = 1
 
-        if f"color_palette_{data.color_palette}" in new_painting_df.columns:
+        if data.color_palette is not None and f"color_palette_{data.color_palette}" in new_painting_df.columns:
             new_painting_df[f"color_palette_{data.color_palette}"] = 1
 
-        if f"copy_original_{data.copy_original}" in new_painting_df.columns:
+        if data.copy_original is not None and f"copy_original_{data.copy_original}" in new_painting_df.columns:
             new_painting_df[f"copy_original_{data.copy_original}"] = 1
 
-        if f"print_real_{data.print_real}" in new_painting_df.columns:
+        if data.print_real is not None and f"print_real_{data.print_real}" in new_painting_df.columns:
             new_painting_df[f"print_real_{data.print_real}"] = 1
 
         if f"environment_{data.environment}" in new_painting_df.columns:
             new_painting_df[f"environment_{data.environment}"] = 1
 
-        if f"mood_{data.mood}" in new_painting_df.columns:
+        if data.mood is not None and f"mood_{data.mood}" in new_painting_df.columns:
             new_painting_df[f"mood_{data.mood}"] = 1
 
-        if f"lighting_{data.lighting}" in new_painting_df.columns:
+        if data.lighting is not None and f"lighting_{data.lighting}" in new_painting_df.columns:
             new_painting_df[f"lighting_{data.lighting}"] = 1
 
-        if f"reproduction_{data.reproduction}" in new_painting_df.columns:
+        if data.reproduction is not None and f"reproduction_{data.reproduction}" in new_painting_df.columns:
             new_painting_df[f"reproduction_{data.reproduction}"] = 1
 
-        if f"audience_{data.audience}" in new_painting_df.columns:
+        if data.audience is not None and f"audience_{data.audience}" in new_painting_df.columns:
             new_painting_df[f"audience_{data.audience}"] = 1
 
         print("Updated DataFrame before scaling:\n", new_painting_df)

@@ -2,16 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Seller Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; }
+        html, body { overflow-x: hidden; }
+
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(to right, #D2B48C, #F5F5DC, #FFFFFF);
-            display: flex;
-            height: 100vh;
             margin: 0;
+            min-height: 100vh;
         }
+
         .sidebar {
             width: 250px;
             background: rgba(255, 255, 255, 0.6);
@@ -22,7 +26,9 @@
             top: 0;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
             border-radius: 0 10px 10px 0;
+            z-index: 20;
         }
+
         .sidebar a {
             display: block;
             color: #34495e;
@@ -32,56 +38,118 @@
             margin: 40px 0;
             transition: 0.3s;
         }
-        .sidebar a:hover {
-            color: #f39c12;
-        }
+
+        .sidebar a:hover { color: #f39c12; }
+
         .menu-icon {
             font-size: 2em;
             cursor: pointer;
             color: #34495e;
             margin-bottom: 50px;
         }
+
         .content {
             margin-left: 270px;
             padding: 20px;
-            width: 100%;
+            width: calc(100% - 270px);
             text-align: center;
             color: #2c3e50;
         }
+
         .container {
-            width: 60%;
+            width: min(100%, 500px);
             background: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            margin: auto;
+            margin: 0 auto;
         }
+
+        .profile-form-wrapper,
+        .upload-form-wrapper,
+        .prediction-form-wrapper {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 0.75rem;
+        }
+
         .form-group {
             margin: 15px 0;
             text-align: left;
         }
+
         label {
             display: block;
             color: #34495e;
             font-weight: bold;
+            margin-bottom: 0.4rem;
         }
-        input, select {
+
+        input,
+        select {
             width: 100%;
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            min-width: 0;
         }
+
+        .form-control,
+        .form-select {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100%;
+            display: block;
+        }
+
         .logo-input {
-            width: 150px;
-            height: 150px;
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
             display: block;
             border: 2px dashed #ccc;
             text-align: center;
-            line-height: 150px;
-            font-size: 14px;
+            padding: 18px 12px;
+            border-radius: 12px;
             margin-top: 10px;
             cursor: pointer;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
+
+        .logo-input::file-selector-button {
+            display: block;
+            width: 100%;
+            margin: 0 auto 8px;
+            padding: 8px 12px;
+            background: #f39c12;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .prediction-form {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .prediction-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .prediction-column {
+            flex: 1 1 220px;
+            min-width: 0;
+        }
+
         button {
             padding: 10px 20px;
             background: #f39c12;
@@ -92,10 +160,9 @@
             cursor: pointer;
             transition: 0.3s;
         }
-        button:hover {
-            background: #e67e22;
-        }
-        /* Popup Styling */
+
+        button:hover { background: #e67e22; }
+
         .popup {
             display: none;
             position: fixed;
@@ -109,279 +176,268 @@
             text-align: center;
             z-index: 1000;
         }
+
         .popup button {
             margin-top: 10px;
             background: #f39c12;
         }
+
+        .sidebar-toggle {
+            position: fixed;
+            top: 14px;
+            left: 14px;
+            z-index: 30;
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-size: 1.8rem;
+            line-height: 1;
+            padding: 0.4rem 0.7rem;
+            display: none;
+        }
+
+        .sidebar-offcanvas {
+            background: rgba(255,255,255,0.96);
+        }
+
+        .sidebar-offcanvas .offcanvas-body a {
+            display: block;
+            color: #34495e;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.7rem 0;
+        }
+
+        @media (max-width: 991.98px) {
+            .sidebar { display: none; }
+            .sidebar-toggle { display: inline-flex; align-items: center; justify-content: center; }
+            .content {
+                width: 100%;
+                margin-left: 0;
+                padding: 20px 12px;
+            }
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding: 16px;
+            }
+            .prediction-row { display: block; }
+            .prediction-column { width: 100%; max-width: 100%; }
+        }
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <button class="btn sidebar-toggle d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sellerSidebar" aria-controls="sellerSidebar" aria-label="Open seller menu">☰</button>
+
+    <div class="sidebar d-none d-lg-block">
         <div class="menu-icon">☰</div>
-        <a href="#" onclick="showSection('profile-section')">Profile</a>
-        <a href="#" onclick="showSection('upload-section')">Upload Product</a>
-        <a href="#" onclick="showSection('prediction-section')">Prediction</a>
-        <a href="seller_about.html" onclick="showSection('about-section')">About</a>
+        <a href="#" data-section="profile-section">Profile</a>
+        <a href="#" data-section="upload-section">Upload Product</a>
+        <a href="#" data-section="prediction-section">Prediction</a>
+        <a href="seller_about.html">About</a>
         <a href="profit.html">Profit</a>
     </div>
-    <div class="content" id="content">
-        <div class="container" id="profile-section">
-            <h2>Edit Profile</h2>
-            <form onsubmit="showPopup(event, 'Profile updated successfully!')">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" placeholder="Enter your name">
-                </div>
-                <div class="form-group">
-                    <label for="artist-info">Artist Info:</label>
-                    <input type="text" id="artist-info" placeholder="Enter artist details">
-                </div>
-                <div class="form-group">
-                    <label for="contact">Contact Info:</label>
-                    <input type="text" id="contact" placeholder="Enter your contact info">
-                </div>
-                <div class="form-group">
-                    <label for="logo">Upload Logo:</label>
-                    <input type="file" id="logo" class="logo-input">
-                </div>
-                <button type="submit">Save Profile</button>
-            </form>
+
+    <div class="offcanvas offcanvas-start sidebar-offcanvas" tabindex="-1" id="sellerSidebar" aria-labelledby="sellerSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sellerSidebarLabel">Seller Menu</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="container" id="upload-section" style="display: none;">
-            <h2>Upload Your Artwork 🎨</h2>
-            <form onsubmit="showPopup(event, 'Artwork uploaded successfully!')">
-                <div class="form-group">
-                    <label for="painting-name">Painting Name*</label>
-                    <input type="text" id="painting-name" placeholder="Enter painting name">
-                </div>
-                <div class="form-group">
-                    <label for="media">Painting Media (optional)</label>
-                    <input type="file" id="media" multiple>
-                </div>
-                <div class="form-group">
-                    <label for="price">Price*</label>
-                    <input type="number" id="price" placeholder="Enter price">
-                </div>
-                <div class="form-group">
-                    <label for="category">Painting Category</label>
-                    <select id="category">
-                        <option>Modernism</option>
-                        <option>Impressionism</option>
-                        <option>Realism</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="tags">Product Tags</label>
-                    <input type="text" id="tags" placeholder="#trend">
-                </div>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-        <div class="container" id="prediction-section" style="display: none;">
-            <form id="predictionForm" onsubmit="return predictPrice(event)">
-                <!-- Row 1 -->
-                <div class="prediction-row">
-                    <div class="prediction-column">
-                        <div class="form-group">
-                            <label>Painter:</label>
-                            <select id="painter" required>
-                                <option value="Leonardo">Leonardo</option>
-                                <option value="Van Gogh">Van Gogh</option>
-                                <option value="Picasso">Picasso</option>
-                                <option value="Monet">Monet</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Subject:</label>
-                            <select id="subject" required>
-                                <option value="Portrait">Portrait</option>
-                                <option value="Landscape">Landscape</option>
-                                <option value="Abstract">Abstract</option>
-                                <option value="Still Life">Still Life</option>
-                                <option value="Historical">Historical</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="prediction-column">
-                        <div class="form-group">
-                            <label>Style:</label>
-                            <select id="style" required>
-                                <option value="Modern">Modern</option>
-                                <option value="Classical">Classical</option>
-                                <option value="Impressionist">Impressionist</option>
-                                <option value="Expressionist">Expressionist</option>
-                                <option value="Surrealist">Surrealist</option>
-                                <option value="Contemporary">Contemporary</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Medium:</label>
-                            <select id="medium" required>
-                                <option value="Oil">Oil</option>
-                                <option value="Acrylic">Acrylic</option>
-                                <option value="Watercolor">Watercolor</option>
-                                <option value="Mixed Media">Mixed Media</option>
-                                <option value="Digital">Digital</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Row 2 -->
-                <div class="prediction-row">
-                    <div class="prediction-column">
-                        <div class="form-group">
-                            <label>Size:</label>
-                            <select id="size" required>
-                                <option value="24\"x36\"">24"x36"</option>
-                                <option value="30\"x40\"">30"x40"</option>
-                                <option value="16\"x20\"">16"x20"</option>
-                                <option value="48\"x60\"">48"x60"</option>
-                                <option value="8\"x10\"">8"x10"</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Frame:</label>
-                            <select id="frame" required>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="prediction-column">
-                        <div class="form-group">
-                            <label>Location:</label>
-                            <select id="location" required>
-                                <option value="New York">New York</option>
-                                <option value="Paris">Paris</option>
-                                <option value="London">London</option>
-                                <option value="Tokyo">Tokyo</option>
-                                <option value="Berlin">Berlin</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Delivery Days:</label>
-                            <input type="number" id="delivery_days" min="1" max="30" value="5" required>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Row 3 -->
-                <div class="prediction-row">
-                    <div class="prediction-column">
-                        <div class="form-group">
-                            <label>Shipment:</label>
-                            <select id="shipment" required>
-                                <option value="Standard">Standard</option>
-                                <option value="Express">Express</option>
-                                <option value="Free">Free</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Color Palette:</label>
-                            <select id="color_palette" required>
-                                <option value="Warm Tones">Warm Tones</option>
-                                <option value="Cool Tones">Cool Tones</option>
-                                <option value="Neutral">Neutral</option>
-                                <option value="Vibrant">Vibrant</option>
-                                <option value="Monochrome">Monochrome</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="prediction-column">
-                        <div class="form-group">
-                            <label>Copy or Original:</label>
-                            <select id="copy_original" required>
-                                <option value="Original">Original</option>
-                                <option value="Copy">Copy</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Print or Real:</label>
-                            <select id="print_real" required>
-                                <option value="Real">Real</option>
-                                <option value="Print">Print</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Row 4 -->
-                <div class="prediction-row">
-                    <div class="prediction-column">
-                        <div class="form-group">
-                            <label>Recommended Environment:</label>
-                            <select id="environment" required>
-                                <option value="Home">Home</option>
-                                <option value="Office">Office</option>
-                                <option value="Gallery">Gallery</option>
-                                <option value="Public Space">Public Space</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Mood/Atmosphere:</label>
-                            <select id="mood" required>
-                                <option value="Calm">Calm</option>
-                                <option value="Energetic">Energetic</option>
-                                <option value="Melancholy">Melancholy</option>
-                                <option value="Joyful">Joyful</option>
-                                <option value="Mysterious">Mysterious</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="prediction-column">
-                        <div class="form-group">
-                            <label>Theme/Lighting Requirements:</label>
-                            <select id="lighting" required>
-                                <option value="Bright">Bright</option>
-                                <option value="Dim">Dim</option>
-                                <option value="Natural">Natural</option>
-                                <option value="Artificial">Artificial</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Reproduction Type:</label>
-                            <select id="reproduction" required>
-                                <option value="Hand-painted">Hand-painted</option>
-                                <option value="Digital">Digital</option>
-                                <option value="Giclee">Giclee</option>
-                                <option value="Other">Other</option>
-                                <option value="None">None</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Row 5 -->
-                <div class="form-group">
-                    <label>Target Audience:</label>
-                    <select id="audience" required>
-                        <option value="Collectors">Collectors</option>
-                        <option value="Home Owners">Home Owners</option>
-                        <option value="Businesses">Businesses</option>
-                        <option value="Museums">Museums</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-
-                <button type="submit">Predict Price</button>
-            </form>
-
-            <div id="predictionResult" style="display: none;">
-                <h3>Predicted Price: <span id="priceValue" style="color: #27ae60;"></span></h3>
+        <div class="offcanvas-body">
+            <div class="nav flex-column">
+                <a href="#" data-section="profile-section">Profile</a>
+                <a href="#" data-section="upload-section">Upload Product</a>
+                <a href="#" data-section="prediction-section">Prediction</a>
+                <a href="seller_about.html">About</a>
+                <a href="profit.html">Profit</a>
             </div>
         </div>
+    </div>
+
+    <div class="content" id="content">
+        <div class="container" id="profile-section">
+            <div class="profile-form-wrapper">
+                <h2>Edit Profile</h2>
+                <form onsubmit="showPopup(event, 'Profile updated successfully!')">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input class="form-control" type="text" id="name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="artist-info">Artist Info:</label>
+                        <input class="form-control" type="text" id="artist-info" placeholder="Enter artist details">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact Info:</label>
+                        <input class="form-control" type="text" id="contact" placeholder="Enter your contact info">
+                    </div>
+                    <div class="form-group">
+                        <label for="logo">Upload Logo:</label>
+                        <input type="file" id="logo" class="logo-input">
+                    </div>
+                    <button type="submit">Save Profile</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container" id="upload-section" style="display: none;">
+            <div class="upload-form-wrapper">
+                <h2>Upload Your Artwork 🎨</h2>
+                <form onsubmit="showPopup(event, 'Artwork uploaded successfully!')">
+                    <div class="form-group">
+                        <label for="painting-name">Painting Name*</label>
+                        <input class="form-control" type="text" id="painting-name" placeholder="Enter painting name">
+                    </div>
+                    <div class="form-group">
+                        <label for="media">Painting Media (optional)</label>
+                        <input class="form-control" type="file" id="media" multiple>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price*</label>
+                        <input class="form-control" type="number" id="price" placeholder="Enter price">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Painting Category</label>
+                        <select class="form-select" id="category">
+                            <option>Modernism</option>
+                            <option>Impressionism</option>
+                            <option>Realism</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tags">Product Tags</label>
+                        <input class="form-control" type="text" id="tags" placeholder="#trend">
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container" id="prediction-section" style="display: none;">
+            <div class="prediction-form-wrapper">
+                <form id="predictionForm" class="prediction-form" onsubmit="return predictPrice(event)">
+                    <div class="prediction-row">
+                        <div class="prediction-column">
+                            <div class="form-group">
+                                <label>Painter:</label>
+                                <select id="painter" class="form-select" required>
+                                    <option value="Leonardo">Leonardo</option>
+                                    <option value="Van Gogh">Van Gogh</option>
+                                    <option value="Picasso">Picasso</option>
+                                    <option value="Monet">Monet</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Subject:</label>
+                                <select id="subject" class="form-select" required>
+                                    <option value="Portrait">Portrait</option>
+                                    <option value="Landscape">Landscape</option>
+                                    <option value="Abstract">Abstract</option>
+                                    <option value="Still Life">Still Life</option>
+                                    <option value="Historical">Historical</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="prediction-column">
+                            <div class="form-group">
+                                <label>Style:</label>
+                                <select id="style" class="form-select" required>
+                                    <option value="Modern">Modern</option>
+                                    <option value="Classical">Classical</option>
+                                    <option value="Impressionist">Impressionist</option>
+                                    <option value="Expressionist">Expressionist</option>
+                                    <option value="Surrealist">Surrealist</option>
+                                    <option value="Contemporary">Contemporary</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Medium:</label>
+                                <select id="medium" class="form-select" required>
+                                    <option value="Oil">Oil</option>
+                                    <option value="Acrylic">Acrylic</option>
+                                    <option value="Watercolor">Watercolor</option>
+                                    <option value="Mixed Media">Mixed Media</option>
+                                    <option value="Digital">Digital</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="prediction-row">
+                        <div class="prediction-column">
+                            <div class="form-group">
+                                <label>Size:</label>
+                                <select id="size" class="form-select" required>
+                                    <option value="24\"x36\"">24"x36"</option>
+                                    <option value="30\"x40\"">30"x40"</option>
+                                    <option value="16\"x20\"">16"x20"</option>
+                                    <option value="48\"x60\"">48"x60"</option>
+                                    <option value="8\"x10\"">8"x10"</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="prediction-column">
+                            <div class="form-group">
+                                <label>Location:</label>
+                                <select id="location" class="form-select" required>
+                                    <option value="">Select a city</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Bengaluru">Bengaluru</option>
+                                    <option value="Hyderabad">Hyderabad</option>
+                                    <option value="Chennai">Chennai</option>
+                                    <option value="Kolkata">Kolkata</option>
+                                    <option value="Pune">Pune</option>
+                                    <option value="Ahmedabad">Ahmedabad</option>
+                                    <option value="Jaipur">Jaipur</option>
+                                    <option value="Lucknow">Lucknow</option>
+                                    <option value="Surat">Surat</option>
+                                    <option value="Thane">Thane</option>
+                                    <option value="Vasai-Virar">Vasai-Virar</option>
+                                    <option value="Navi Mumbai">Navi Mumbai</option>
+                                    <option value="Nagpur">Nagpur</option>
+                                    <option value="Indore">Indore</option>
+                                    <option value="Bhopal">Bhopal</option>
+                                    <option value="Visakhapatnam">Visakhapatnam</option>
+                                    <option value="Patna">Patna</option>
+                                    <option value="Vadodara">Vadodara</option>
+                                    <option value="Ludhiana">Ludhiana</option>
+                                    <option value="Agra">Agra</option>
+                                    <option value="Nashik">Nashik</option>
+                                    <option value="Kochi">Kochi</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Recommended Environment:</label>
+                        <select id="environment" class="form-select" required>
+                            <option value="Home">Home</option>
+                            <option value="Office">Office</option>
+                            <option value="Gallery">Gallery</option>
+                            <option value="Public Space">Public Space</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Predict Price</button>
+                </form>
+
+                <div id="predictionResult" style="display: none; margin-top: 20px;">
+                    <h3>Predicted Price: <span id="priceValue" style="color: #27ae60;"></span></h3>
+                </div>
+            </div>
+        </div>
+
         <div class="container" id="profit-section" style="display: none;">
             <h2>Profit</h2>
             <p>Track your earnings here.</p>
@@ -392,35 +448,51 @@
         </div>
     </div>
 
-    <!-- Popup -->
     <div class="popup" id="popup">
         <p id="popup-message"></p>
         <button onclick="closePopup()">OK</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function showSection(sectionId) {
             document.querySelectorAll('.container').forEach(section => {
                 section.style.display = 'none';
             });
-            document.getElementById(sectionId).style.display = 'block';
+            const target = document.getElementById(sectionId);
+            if (target) target.style.display = 'block';
+
+            const offcanvasEl = document.getElementById('sellerSidebar');
+            if (offcanvasEl) {
+                const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+                if (bsOffcanvas) bsOffcanvas.hide();
+            }
         }
+
+        document.querySelectorAll('[data-section]').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                showSection(this.getAttribute('data-section'));
+            });
+        });
 
         function showPopup(event, message) {
             event.preventDefault();
-            document.getElementById("popup-message").innerText = message;
-            document.getElementById("popup").style.display = "block";
+            document.getElementById('popup-message').innerText = message;
+            document.getElementById('popup').style.display = 'block';
         }
 
         function closePopup() {
-            document.getElementById("popup").style.display = "none";
+            document.getElementById('popup').style.display = 'none';
         }
 
         async function predictPrice(event) {
             event.preventDefault();
             const button = event.target.querySelector('button');
-            button.disabled = true;
-            button.innerHTML = 'Predicting...';
+            if (button) {
+                button.disabled = true;
+                button.innerHTML = 'Predicting...';
+            }
 
             const formData = {
                 painter: document.getElementById('painter').value,
@@ -428,18 +500,8 @@
                 style: document.getElementById('style').value,
                 medium: document.getElementById('medium').value,
                 size: document.getElementById('size').value,
-                frame: document.getElementById('frame').value,
                 location: document.getElementById('location').value,
-                delivery_days: document.getElementById('delivery_days').value,
-                shipment: document.getElementById('shipment').value,
-                color_palette: document.getElementById('color_palette').value,
-                copy_original: document.getElementById('copy_original').value,
-                print_real: document.getElementById('print_real').value,
-                environment: document.getElementById('environment').value,
-                mood: document.getElementById('mood').value,
-                lighting: document.getElementById('lighting').value,
-                reproduction: document.getElementById('reproduction').value,
-                audience: document.getElementById('audience').value
+                environment: document.getElementById('environment').value
             };
 
             try {
@@ -449,22 +511,23 @@
                     body: JSON.stringify(formData)
                 });
 
-                console.log("Form Data: ",formData)
                 if (!response.ok) throw new Error('Prediction failed');
-                
+
                 const result = await response.json();
-                document.getElementById('priceValue').textContent = result.predicted_price;
-                document.getElementById('predictionResult').style.display = 'block';
+                const resultEl = document.getElementById('predictionResult');
+                const priceEl = document.getElementById('priceValue');
+                if (resultEl) resultEl.style.display = 'block';
+                if (priceEl) priceEl.textContent = result.predicted_price;
             } catch (error) {
                 console.error('Error:', error);
                 alert('Prediction failed. Please try again.');
             } finally {
-                button.disabled = false;
-                button.innerHTML = 'Predict Price';
+                if (button) {
+                    button.disabled = false;
+                    button.innerHTML = 'Predict Price';
+                }
             }
         }
-
-       
     </script>
 </body>
 </html>

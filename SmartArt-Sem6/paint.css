@@ -1,12 +1,13 @@
 body {
     margin: 0;
-    font-family: Poppins;
+    font-family: Poppins, Arial, sans-serif;
+    padding-bottom: 80px;
+    overflow-x: hidden;
 }
 
 .container {
-    width: 900px;
+    width: min(1200px, 94vw);
     margin: auto;
-    max-width: 90vw;
     text-align: center;
     padding-top: 10px;
     transition: transform .5s;
@@ -14,6 +15,7 @@ body {
 
 svg {
     width: 30px;
+    height: 30px;
 }
 
 header {
@@ -21,25 +23,26 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
+    gap: 12px;
+    white-space: nowrap;
 }
 
-/* Customer Care & Cart Layout */
 .header-icons {
     display: flex;
     align-items: center;
-    gap: 15px; /* Space between Customer Care and Cart */
+    gap: 15px;
 }
 
 .customer-care {
     width: 35px;
     height: 35px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     background-color: #f45af9;
     color: white;
     border: none;
-    border-radius: 50%; /* Makes it a circle */
+    border-radius: 50%;
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
@@ -49,7 +52,6 @@ header {
 .customer-care:hover {
     background-color: #ae33df;
 }
-
 
 .icon-cart {
     position: relative;
@@ -73,57 +75,68 @@ header {
 }
 
 .title {
-    font-size: xx-large;
-}
-
-.listProduct .item img {
-    width: 90%;
-    filter: drop-shadow(0 50px 20px #0009);
+    font-size: clamp(1.2rem, 3vw, 2.5rem);
+    line-height: 1.2;
 }
 
 .listProduct {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
 }
 
 .listProduct .item {
     background-color: #EEEEE6;
-    padding: 20px;
+    padding: 16px;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.listProduct .item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+    filter: drop-shadow(0 20px 15px rgba(0, 0, 0, 0.12));
 }
 
 .listProduct .item h2 {
     font-weight: 500;
     font-size: large;
+    margin-top: 12px;
 }
 
 .listProduct .item .price {
-    letter-spacing: 7px;
-    font-size: small;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-top: auto;
 }
 
 .listProduct .item button {
     background-color: #353432;
     color: #eee;
     border: none;
-    padding: 5px 10px;
-    margin-top: 10px;
+    padding: 8px 14px;
+    margin-top: 12px;
     border-radius: 20px;
+    width: 100%;
 }
 
-/* Shopping Cart */
 .cartTab {
-    width: 400px;
+    width: min(400px, 100vw);
     background-color: #353432;
     color: #eee;
     position: fixed;
     top: 0;
-    right: -400px;
+    right: -100vw;
     bottom: 0;
     display: grid;
     grid-template-rows: 70px 1fr 70px;
     transition: .5s;
+    z-index: 50;
 }
 
 body.showCart .cartTab {
@@ -148,7 +161,7 @@ body.showCart .container {
 .cartTab button {
     background-color: #E8BC0E;
     border: none;
-    font-family: Poppins;
+    font-family: Poppins, Arial, sans-serif;
     font-weight: 500;
     cursor: pointer;
 }
@@ -159,6 +172,8 @@ body.showCart .container {
 
 .listCart .item img {
     width: 100%;
+    height: 60px;
+    object-fit: cover;
 }
 
 .listCart .item {
@@ -197,15 +212,38 @@ body.showCart .container {
     width: 0;
 }
 
-/* Responsive Design */
 @media only screen and (max-width: 992px) {
     .listProduct {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
 @media only screen and (max-width: 768px) {
     .listProduct {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    header {
+        gap: 8px;
+        padding: 14px 0;
+    }
+
+    .header-icons {
+        gap: 10px;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .container {
+        width: min(100%, 92vw);
+    }
+
+    .listProduct .item img {
+        height: 180px;
     }
 }
