@@ -186,7 +186,7 @@
             position: fixed;
             top: 14px;
             left: 14px;
-            z-index: 30;
+            z-index: 1050;
             background: rgba(255,255,255,0.8);
             border: 1px solid rgba(0,0,0,0.1);
             border-radius: 8px;
@@ -201,6 +201,28 @@
         }
 
         .sidebar-offcanvas .offcanvas-body a {
+            display: block;
+            color: #34495e;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.7rem 0;
+        }
+
+        #sellerSidebar {
+            width: min(280px, 85vw);
+        }
+
+        #sellerSidebar .offcanvas-header {
+            padding-left: 72px;
+        }
+
+        @media (max-width: 991.98px) {
+            /* Leave room for the fixed menu button */
+            .content { padding-top: 72px !important; }
+        }
+
+        #sellerSidebar .offcanvas-body a {
             display: block;
             color: #34495e;
             text-decoration: none;
@@ -373,11 +395,11 @@
                             <div class="form-group">
                                 <label>Size:</label>
                                 <select id="size" class="form-select" required>
-                                    <option value="24\"x36\"">24"x36"</option>
-                                    <option value="30\"x40\"">30"x40"</option>
-                                    <option value="16\"x20\"">16"x20"</option>
-                                    <option value="48\"x60\"">48"x60"</option>
-                                    <option value="8\"x10\"">8"x10"</option>
+                                    <option value="24&quot;x36&quot;">24"x36"</option>
+                                    <option value="30&quot;x40&quot;">30"x40"</option>
+                                    <option value="16&quot;x20&quot;">16"x20"</option>
+                                    <option value="48&quot;x60&quot;">48"x60"</option>
+                                    <option value="8&quot;x10&quot;">8"x10"</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
@@ -475,6 +497,11 @@
                 showSection(this.getAttribute('data-section'));
             });
         });
+
+        // Open the section named in the URL hash (e.g. from the About/Profit pages)
+        if (location.hash && document.getElementById(location.hash.slice(1))) {
+            showSection(location.hash.slice(1));
+        }
 
         function showPopup(event, message) {
             event.preventDefault();

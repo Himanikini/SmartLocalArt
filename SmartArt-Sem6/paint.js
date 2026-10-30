@@ -22,15 +22,18 @@ if (closeCart) {
 const addDataToHTML = () => {
     if (products.length > 0) {
         products.forEach(product => {
+            let column = document.createElement('div');
+            column.classList.add('col');
             let newProduct = document.createElement('div');
             newProduct.dataset.id = product.id;
-            newProduct.classList.add('item', 'col');
+            newProduct.classList.add('item', 'h-100');
             newProduct.innerHTML = `
                 <img src="${product.image}" alt="${product.name}" class="img-fluid">
                 <h2>${product.name}</h2>
                 <div class="price">Ru.${product.price}</div>
                 <button class="addCart">Add To Cart</button>`;
-            listProductHTML.appendChild(newProduct);
+            column.appendChild(newProduct);
+            listProductHTML.appendChild(column);
         });
     }
 };

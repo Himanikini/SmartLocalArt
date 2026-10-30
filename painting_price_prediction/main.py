@@ -21,9 +21,6 @@ class PaintingInput(BaseModel):
     size: str
     location: str
     environment: str
-    frame: str | None = None
-    mood: str | None = None
-    audience: str | None = None
 
 # Initialize FastAPI
 app = FastAPI()
@@ -41,58 +38,27 @@ async def predict_price(data: PaintingInput):
         # Create a DataFrame with all zeros
         new_painting_df = pd.DataFrame(0, index=[0], columns=columns)
 
-        # Assign numerical value only when provided
-        if data.delivery_days is not None:
-            new_painting_df['Delivery (days)'] = data.delivery_days
+        # Manually set one-hot encoded values (column names match the training CSV headers)
+        if f"Name of Painter_{data.painter}" in new_painting_df.columns:
+            new_painting_df[f"Name of Painter_{data.painter}"] = 1
 
-        # Manually set one-hot encoded values
-        if f"painter_{data.painter}" in new_painting_df.columns:
-            new_painting_df[f"painter_{data.painter}"] = 1
+        if f"Subject of Painting_{data.subject}" in new_painting_df.columns:
+            new_painting_df[f"Subject of Painting_{data.subject}"] = 1
 
-        if f"subject_{data.subject}" in new_painting_df.columns:
-            new_painting_df[f"subject_{data.subject}"] = 1
+        if f"Style_{data.style}" in new_painting_df.columns:
+            new_painting_df[f"Style_{data.style}"] = 1
 
-        if f"style_{data.style}" in new_painting_df.columns:
-            new_painting_df[f"style_{data.style}"] = 1
+        if f"Medium_{data.medium}" in new_painting_df.columns:
+            new_painting_df[f"Medium_{data.medium}"] = 1
 
-        if f"medium_{data.medium}" in new_painting_df.columns:
-            new_painting_df[f"medium_{data.medium}"] = 1
+        if f"Size_{data.size}" in new_painting_df.columns:
+            new_painting_df[f"Size_{data.size}"] = 1
 
-        if f"size_{data.size}" in new_painting_df.columns:
-            new_painting_df[f"size_{data.size}"] = 1
+        if f"Location_{data.location}" in new_painting_df.columns:
+            new_painting_df[f"Location_{data.location}"] = 1
 
-        if data.frame is not None and f"frame_{data.frame}" in new_painting_df.columns:
-            new_painting_df[f"frame_{data.frame}"] = 1
-
-        if f"location_{data.location}" in new_painting_df.columns:
-            new_painting_df[f"location_{data.location}"] = 1
-
-        if data.shipment is not None and f"shipment_{data.shipment}" in new_painting_df.columns:
-            new_painting_df[f"shipment_{data.shipment}"] = 1
-
-        if data.color_palette is not None and f"color_palette_{data.color_palette}" in new_painting_df.columns:
-            new_painting_df[f"color_palette_{data.color_palette}"] = 1
-
-        if data.copy_original is not None and f"copy_original_{data.copy_original}" in new_painting_df.columns:
-            new_painting_df[f"copy_original_{data.copy_original}"] = 1
-
-        if data.print_real is not None and f"print_real_{data.print_real}" in new_painting_df.columns:
-            new_painting_df[f"print_real_{data.print_real}"] = 1
-
-        if f"environment_{data.environment}" in new_painting_df.columns:
-            new_painting_df[f"environment_{data.environment}"] = 1
-
-        if data.mood is not None and f"mood_{data.mood}" in new_painting_df.columns:
-            new_painting_df[f"mood_{data.mood}"] = 1
-
-        if data.lighting is not None and f"lighting_{data.lighting}" in new_painting_df.columns:
-            new_painting_df[f"lighting_{data.lighting}"] = 1
-
-        if data.reproduction is not None and f"reproduction_{data.reproduction}" in new_painting_df.columns:
-            new_painting_df[f"reproduction_{data.reproduction}"] = 1
-
-        if data.audience is not None and f"audience_{data.audience}" in new_painting_df.columns:
-            new_painting_df[f"audience_{data.audience}"] = 1
+        if f"Recommended Environment_{data.environment}" in new_painting_df.columns:
+            new_painting_df[f"Recommended Environment_{data.environment}"] = 1
 
         print("Updated DataFrame before scaling:\n", new_painting_df)
 

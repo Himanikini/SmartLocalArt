@@ -87,7 +87,7 @@
             position: fixed;
             top: 14px;
             left: 14px;
-            z-index: 30;
+            z-index: 1050;
             background: rgba(255,255,255,0.8);
             border: 1px solid rgba(0,0,0,0.1);
             border-radius: 8px;
@@ -96,6 +96,28 @@
             padding: 0.4rem 0.7rem;
             display: none;
         }
+        #sellerSidebar {
+            width: min(280px, 85vw);
+        }
+
+        #sellerSidebar .offcanvas-header {
+            padding-left: 72px;
+        }
+
+        @media (max-width: 991.98px) {
+            /* Leave room for the fixed menu button */
+            .content { padding-top: 72px !important; }
+        }
+
+        #sellerSidebar .offcanvas-body a {
+            display: block;
+            color: #34495e;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.7rem 0;
+        }
+
         @media (max-width: 991.98px) {
             .sidebar {
                 display: none;
@@ -121,8 +143,8 @@
 
     <div class="sidebar d-none d-lg-block">
         <a href="profile.html">Profile</a>
-        <a href="profile.html">Upload Product</a>
-        <a href="profile.html">Prediction</a>
+        <a href="profile.html#upload-section">Upload Product</a>
+        <a href="profile.html#prediction-section">Prediction</a>
         <a href="#">About</a>
         <a href="profit.html">Profit</a>
     </div>
@@ -135,8 +157,8 @@
         <div class="offcanvas-body">
             <div class="nav flex-column">
                 <a href="profile.html">Profile</a>
-                <a href="profile.html">Upload Product</a>
-                <a href="profile.html">Prediction</a>
+                <a href="profile.html#upload-section">Upload Product</a>
+                <a href="profile.html#prediction-section">Prediction</a>
                 <a href="#">About</a>
                 <a href="profit.html">Profit</a>
             </div>
